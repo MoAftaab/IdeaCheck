@@ -10,6 +10,7 @@ import {
   FileText,
   Loader2,
   Sparkles,
+  Wand2,
   XCircle,
 } from "lucide-react";
 
@@ -35,6 +36,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { analyzePatentIdea, type AnalyzePatentIdeaOutput } from "@/ai/flows/patent-idea-analysis";
+import { generateKeywords } from "@/ai/flows/generate-keywords";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const formSchema = z.object({
@@ -55,6 +57,7 @@ export function PatentAnalysisClient() {
   const [analysisResult, setAnalysisResult] =
     useState<AnalyzePatentIdeaOutput | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isGeneratingKeywords, setIsGeneratingKeywords] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,6 +67,33 @@ export function PatentAnalysisClient() {
       keywords: "",
     },
   });
+
+  const handleGenerateKeywords = async () => {
+    const ideaDescription = form.getValues("ideaDescription");
+    if (!ideaDescription || ideaDescription.length < 50) {
+      form.setError("ideaDescription", {
+        type: "manual",
+        message: "Please enter an idea description of at least 50 characters to generate keywords.",
+      });
+      return;
+    }
+
+    setIsGeneratingKeywords(true);
+    try {
+      const result = await generateKeywords({ ideaDescription });
+      form.setValue("keywords", result.keywords, { shouldValidate: true });
+    } catch (error) {
+      console.error("Keyword generation failed:", error);
+      toast({
+        variant: "destructive",
+        title: "Keyword Generation Failed",
+        description: "There was an error generating keywords. Please try again.",
+      });
+    } finally {
+      setIsGeneratingKeywords(false);
+    }
+  };
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
@@ -134,7 +164,23 @@ export function PatentAnalysisClient() {
                 name="keywords"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">Keywords</FormLabel>
+                    <div className="flex justify-between items-center">
+                      <FormLabel className="text-lg">Keywords</FormLabel>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleGenerateKeywords}
+                        disabled={isGeneratingKeywords}
+                      >
+                        {isGeneratingKeywords ? (
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                          <Wand2 className="mr-2 h-4 w-4" />
+                        )}
+                        Generate Keywords
+                      </Button>
+                    </div>
                     <FormControl>
                       <Input
                         placeholder="e.g., smart mug, temperature control, IoT, beverage"

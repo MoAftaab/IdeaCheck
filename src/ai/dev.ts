@@ -3,3 +3,4 @@ config();
 
 import '@/ai/flows/patentability-suggestion-engine.ts';
 import '@/ai/flows/patent-idea-analysis.ts';
+import '@/ai/flows/generate-keywords.ts';
