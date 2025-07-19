@@ -40,11 +40,14 @@ export async function analyzePatentIdea(input: AnalyzePatentIdeaInput): Promise<
 
 const analyzePatentIdeaPrompt = ai.definePrompt({
   name: 'analyzePatentIdeaPrompt',
+  model: 'googleai/gemini-1.5-pro-latest',
   input: {schema: AnalyzePatentIdeaInputSchema},
   output: {schema: AnalyzePatentIdeaOutputSchema},
   prompt: `You are an expert patent attorney specializing in analyzing the patentability of inventions.
 
-You will use the provided information to assess the novelty and patentability of the idea. Provide a patentability analysis, including whether the idea is likely to be patentable, a summary of your analysis, and a list of cited resources. For each cited resource, provide a title and a direct URL to the resource (e.g., a Google Patents link for patents).
+You will use the provided information to assess the novelty and patentability of the idea. Provide a patentability analysis, including whether the idea is likely to be patentable, a summary of your analysis, and a list of cited resources. 
+
+IMPORTANT: For each cited resource, you MUST provide an accurate title and a valid, matching, and publicly accessible URL (e.g., a Google Patents link). Double-check that the title and URL correspond to the same patent or publication. Do not invent URLs or mismatch titles.
 
 Also, provide concise suggestions for improving the patentability of the idea.
 
