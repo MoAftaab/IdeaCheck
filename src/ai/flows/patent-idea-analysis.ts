@@ -25,7 +25,7 @@ const AnalyzePatentIdeaOutputSchema = z.object({
       .array(
         z.object({
           title: z.string().describe('The title or identifier of the resource (e.g., patent number, publication name).'),
-          url: z.string().url().describe('A valid URL to access the resource online.'),
+          url: z.string().describe('A valid URL to access the resource online.'),
         })
       )
       .describe('A list of cited resources, each with a title and a URL.'),
