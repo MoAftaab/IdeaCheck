@@ -40,7 +40,6 @@ export async function analyzePatentIdea(input: AnalyzePatentIdeaInput): Promise<
 
 const analyzePatentIdeaPrompt = ai.definePrompt({
   name: 'analyzePatentIdeaPrompt',
-  model: 'googleai/gemini-1.5-pro-latest',
   input: {schema: AnalyzePatentIdeaInputSchema},
   output: {schema: AnalyzePatentIdeaOutputSchema},
   prompt: `You are an expert patent attorney specializing in analyzing the patentability of inventions.
