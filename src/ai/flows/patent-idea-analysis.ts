@@ -21,7 +21,14 @@ const AnalyzePatentIdeaOutputSchema = z.object({
   patentabilityAnalysis: z.object({
     isPatentable: z.boolean().describe('Whether the patent idea is likely to be patentable.'),
     analysisSummary: z.string().describe('A summary of the patentability analysis.'),
-    citedResources: z.array(z.string()).describe('A list of cited resources (e.g., patent numbers, publications).'),
+    citedResources: z
+      .array(
+        z.object({
+          title: z.string().describe('The title or identifier of the resource (e.g., patent number, publication name).'),
+          url: z.string().url().describe('A valid URL to access the resource online.'),
+        })
+      )
+      .describe('A list of cited resources, each with a title and a URL.'),
   }),
   improvementSuggestions: z.string().describe('Suggestions for improving the patentability of the idea.'),
 });
@@ -37,7 +44,7 @@ const analyzePatentIdeaPrompt = ai.definePrompt({
   output: {schema: AnalyzePatentIdeaOutputSchema},
   prompt: `You are an expert patent attorney specializing in analyzing the patentability of inventions.
 
-You will use the provided information to assess the novelty and patentability of the idea. Provide a patentability analysis, including whether the idea is likely to be patentable, a summary of your analysis, and a list of cited resources.
+You will use the provided information to assess the novelty and patentability of the idea. Provide a patentability analysis, including whether the idea is likely to be patentable, a summary of your analysis, and a list of cited resources. For each cited resource, provide a title and a direct URL to the resource (e.g., a Google Patents link for patents).
 
 Also, provide concise suggestions for improving the patentability of the idea.
 

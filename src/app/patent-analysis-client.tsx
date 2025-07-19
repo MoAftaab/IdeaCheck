@@ -8,6 +8,7 @@ import {
   BookOpen,
   CheckCircle2,
   FileText,
+  Link as LinkIcon,
   Loader2,
   Sparkles,
   Wand2,
@@ -319,9 +320,19 @@ function ResultsDisplay({ result }: { result: AnalyzePatentIdeaOutput }) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc list-inside space-y-2 text-base">
+            <ul className="space-y-3 text-base">
               {patentabilityAnalysis.citedResources.map((resource, index) => (
-                <li key={index}>{resource}</li>
+                <li key={index} className="flex items-start gap-3">
+                  <LinkIcon className="h-4 w-4 mt-1 shrink-0 text-primary/80" />
+                  <a
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    {resource.title}
+                  </a>
+                </li>
               ))}
             </ul>
           </CardContent>
