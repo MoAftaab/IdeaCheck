@@ -12,9 +12,9 @@ export default function Home() {
               className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
               style={{
                 backgroundImage:
-                  'linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDoOMyaid___STUBMRrTRv8DqPVbUkCZRmp1t2lT0Xm3VoUY0phQ9L4Can8MMIEjA4PkHxgjJ8sb8vD4t8xP8HjsgepEc1A4pGJ_qmn2vTue-Ti7uIr6vK9ycNVxPoPMs7ycGppCzM5Znq0A04Imm9XdPReFXCvAYVMSwupgqlCX51l4JY53YYQyrrXGleZzAjyGKTFC99JvkmPJFYTVTe9mcba3IDiRHbTU74d3Gd5AnFdVVqetczGmw7OjOX4_OekW9DNFpdsFSR1")',
+                  'linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDZCW1JpAGatH13YtEATVPS8O6NYJB-VBiQQ5HzrmBzrAe6ZoXiFKbb4y4M0yOp_EdZxAqmA0_t8GBgWU0hk4jVcPq8z-7Y5zMudL8OkQPj11YIfpOaj0QFETBAex_yqJl4dgiMorvrHEPnvnTE5kwsCBXMDCT3IOh8hYEVZwqGaZeN5rtS0-DZZhMWcOfa0LWMVVV0mF6wDtRfK1V1ccTi9NnTAuwlH5kXW2rv96niC3N2szo2seXomoFXTtHJH1ntPymjJ5uVDTcD")',
               }}
-              data-ai-hint="innovation technology"
+              data-ai-hint="innovation technology space"
             >
               <div className="flex flex-col gap-2 text-center">
                 <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
@@ -26,7 +26,7 @@ export default function Home() {
               </div>
               <Link
                 href="/check"
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#0b80ee] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-primary-foreground text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
               >
                 <span className="truncate">Start a check</span>
               </Link>
