@@ -67,7 +67,6 @@ const analyzePatentIdeaFlow = ai.defineFlow(
     name: 'analyzePatentIdeaFlow',
     inputSchema: AnalyzePatentIdeaInputSchema,
     outputSchema: AnalyzePatentIdeaOutputSchema,
-    model: 'gemini-1.5-pro-latest'
   },
   async input => {
     const {output} = await analyzePatentIdeaPrompt(input);
