@@ -16,7 +16,6 @@ IdeaCheck is a web application that leverages the power of Google's Gemini AI to
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [Shadcn/ui](https://ui.shadcn.com/)
 - **AI Integration**: [Genkit](https://firebase.google.com/docs/genkit) & [Google AI](https://ai.google.dev/)
-- **Development Environment**: Firebase Studio
 
 ## Getting Started
 
