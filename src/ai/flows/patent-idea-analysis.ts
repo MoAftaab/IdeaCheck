@@ -13,7 +13,7 @@ import {z} from 'genkit';
 
 const AnalyzePatentIdeaInputSchema = z.object({
   ideaDescription: z.string().describe('A detailed description of the patent idea.'),
-  keywords: z.string().describe('Keywords related to the patent idea to refine the search.'),
+  keywords: z.string().optional().describe('Keywords related to the patent idea to refine the search.'),
 });
 export type AnalyzePatentIdeaInput = z.infer<typeof AnalyzePatentIdeaInputSchema>;
 
@@ -51,7 +51,6 @@ IMPORTANT: For each cited resource, you MUST provide an accurate title and a val
 Also, provide concise suggestions for improving the patentability of the idea.
 
 Idea Description: {{{ideaDescription}}}
-Keywords: {{{keywords}}}
 
 Consider the following:
 - Prior art: Search for existing patents and publications that are similar to the idea.
@@ -68,6 +67,7 @@ const analyzePatentIdeaFlow = ai.defineFlow(
     name: 'analyzePatentIdeaFlow',
     inputSchema: AnalyzePatentIdeaInputSchema,
     outputSchema: AnalyzePatentIdeaOutputSchema,
+    model: 'gemini-1.5-pro-latest'
   },
   async input => {
     const {output} = await analyzePatentIdeaPrompt(input);

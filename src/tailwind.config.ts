@@ -32,9 +32,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Poppins', 'sans-serif'],
-        code: ['monospace'],
+        body: ['Inter', '"Noto Sans"', 'sans-serif'],
+        headline: ['Inter', '"Noto Sans"', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
