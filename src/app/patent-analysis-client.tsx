@@ -115,7 +115,7 @@ export function PatentAnalysisClient() {
   }
 
   return (
-    <div className="container mx-auto py-8 sm:py-12 px-4">
+    <div className="container mx-auto px-4">
       <div className="text-center mb-10">
         <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight text-primary">
           Turn Your Idea into a Patent
@@ -127,7 +127,7 @@ export function PatentAnalysisClient() {
         </p>
       </div>
 
-      <Card className="max-w-4xl mx-auto shadow-lg">
+      <Card className="max-w-4xl mx-auto bg-card/50 backdrop-blur-sm border-border/50">
         <CardHeader>
           <CardTitle className="font-headline text-2xl">
             Submit Your Idea
@@ -200,7 +200,7 @@ export function PatentAnalysisClient() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90"
+                className="w-full sm:w-auto"
                 size="lg"
               >
                 {loading ? (
@@ -226,7 +226,7 @@ export function PatentAnalysisClient() {
 function LoadingState() {
   return (
     <div className="max-w-4xl mx-auto mt-12 space-y-8">
-      <Card className="shadow-lg">
+      <Card className="shadow-lg bg-card/50 backdrop-blur-sm border-border/50">
         <CardHeader>
           <Skeleton className="h-8 w-3/4" />
           <Skeleton className="h-5 w-1/2" />
@@ -237,7 +237,7 @@ function LoadingState() {
           <Skeleton className="h-4 w-5/6" />
         </CardContent>
       </Card>
-      <Card className="shadow-lg">
+      <Card className="shadow-lg bg-card/50 backdrop-blur-sm border-border/50">
         <CardHeader>
           <Skeleton className="h-8 w-3/4" />
         </CardHeader>
@@ -246,7 +246,7 @@ function LoadingState() {
           <Skeleton className="h-4 w-full" />
         </CardContent>
       </Card>
-      <Card className="shadow-lg">
+      <Card className="shadow-lg bg-card/50 backdrop-blur-sm border-border/50">
         <CardHeader>
            <Skeleton className="h-8 w-3/4" />
         </CardHeader>
@@ -273,8 +273,8 @@ function ResultsDisplay({ result }: { result: AnalyzePatentIdeaOutput }) {
         <Badge
           className={`mt-4 text-lg py-1 px-4 ${
             isPatentable
-              ? "bg-green-100 text-green-800 border-green-300 dark:bg-green-900/50 dark:text-green-300"
-              : "bg-red-100 text-red-800 border-red-300 dark:bg-red-900/50 dark:text-red-300"
+              ? "bg-green-900/50 text-green-300 border-green-300/20"
+              : "bg-red-900/50 text-red-300 border-red-300/20"
           }`}
           variant="outline"
         >
@@ -288,31 +288,31 @@ function ResultsDisplay({ result }: { result: AnalyzePatentIdeaOutput }) {
       </div>
 
       <div className="space-y-8">
-        <Card className="shadow-lg">
+        <Card className="shadow-lg bg-card/50 backdrop-blur-sm border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 font-headline text-2xl">
               <FileText className="text-primary" />
               Analysis Summary
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-base prose dark:prose-invert max-w-none">
+          <CardContent className="text-base prose prose-invert max-w-none">
             <p>{patentabilityAnalysis.analysisSummary}</p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-lg">
+        <Card className="shadow-lg bg-card/50 backdrop-blur-sm border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 font-headline text-2xl">
-              <Sparkles className="text-accent" />
+              <Sparkles className="text-primary" />
               Improvement Suggestions
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-base prose dark:prose-invert max-w-none">
+          <CardContent className="text-base prose prose-invert max-w-none">
             <p>{improvementSuggestions}</p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-lg">
+        <Card className="shadow-lg bg-card/50 backdrop-blur-sm border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 font-headline text-2xl">
               <BookOpen className="text-primary" />
@@ -321,19 +321,23 @@ function ResultsDisplay({ result }: { result: AnalyzePatentIdeaOutput }) {
           </CardHeader>
           <CardContent>
             <ul className="space-y-3 text-base">
-              {patentabilityAnalysis.citedResources.map((resource, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <LinkIcon className="h-4 w-4 mt-1 shrink-0 text-primary/80" />
-                  <a
-                    href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary underline-offset-4 hover:underline"
-                  >
-                    {resource.title}
-                  </a>
-                </li>
-              ))}
+              {patentabilityAnalysis.citedResources.length > 0 ? (
+                patentabilityAnalysis.citedResources.map((resource, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <LinkIcon className="h-4 w-4 mt-1 shrink-0 text-primary/80" />
+                    <a
+                      href={resource.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary underline-offset-4 hover:underline"
+                    >
+                      {resource.title}
+                    </a>
+                  </li>
+                ))
+              ) : (
+                <p className="text-muted-foreground">No relevant prior art was found during the analysis.</p>
+              )}
             </ul>
           </CardContent>
         </Card>
